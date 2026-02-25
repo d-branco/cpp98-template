@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Whitelist
+!.gitignore
+
+!Makefile
+
+!*.cpp
+!srcs/
+!srcs/*
+
+!*.hpp
+!include/
+!include/*
+!doctest.h
+
+!README.md
+!STYLE.md
