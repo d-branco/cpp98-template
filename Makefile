@@ -1,3 +1,14 @@
+#  **************************************************************************  #
+#                                           ::::::::    ::::::::   :::::::::   #
+#    Makefile                             :+:    :+:  :+:    :+:  :+:          #
+#                                              +:+         :+:   :+:           #
+#    github.com/d-branco                    +#+         +#+      +#+#+#+       #
+#                                        +#+         +#+              +#+      #
+#    Created: 2026/02/25 20:52:12      #+#         #+#      +#+        #+#     #
+#    Updated: 2026/02/25 20:54:49     #########  #########  ###      ###       #
+#                                                             ########         #
+#  **************************************************************************  #
+
 NAME			:= a.out
 
 ARGS			=
@@ -270,7 +281,7 @@ BG_RED		:= \033[1;30m\033[101m
 
 ###################################################################### Headers #
 headers:
-	@modified=0; \
+	@\
 	for file in $$(find . -name "Makefile"); do	\
 		if [ -f "$$file" ]; then	\
 			first_line=$$(head -n 1 "$$file"); \
@@ -324,7 +335,6 @@ headers:
 				cat temp.txt > $$file; \
 				rm -f temp.txt; \
 				echo "$(GRAY)Header create:$(RESET) $$file"; \
-				modified=1; \
 			else	\
 				header_date=$$(sed -n '8p' "$$file" |	\
 					sed 's/.*Updated: \([0-9/: ]*\).*/\1/'); \
@@ -334,15 +344,10 @@ headers:
 					echo "$(GRAY)Header update:$(RESET) $$file"; \
 					update_date=$$(date '+%Y/%m/%d %H:%M:%S'); \
 					sed -i "8s|.*|/*   Updated: $$update_date     #########  #########  ###      ###      */|" "$$file"; \
-					modified=1; \
 				fi; \
 			fi; \
 		fi; \
-	done; \
-	\
-	if [ "$$modified" -eq 1 ]; then	\
-		$(MAKE) clean --silent; \
-	fi
+	done
 
 ######################################################################### Time #
 time: $(NAME)
