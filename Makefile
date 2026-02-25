@@ -29,7 +29,8 @@ CFLAGS			+= $(LDFLAGS) $(LDLIBS)
 
 TEST_FLAGS		= $(CFLAGS) -DTESTING
 
-INCLUDES		:= -I$(INC_DIR)
+INC_DIRS		:= $(shell find $(INC_DIR) -type d 2>/dev/null)
+INCLUDES		:= $(addprefix -I, $(INC_DIRS))
 LDFLAGS			:=
 LDLIBS			:=
 
@@ -288,7 +289,7 @@ headers:
 				cat $$file >> temp.txt; \
 				cat temp.txt > $$file; \
 				rm -f temp.txt; \
-				echo "$(GRAY)Header create:$(RESET) $file"; \
+				echo "$(GRAY)Header create:$(RESET) $$file"; \
 			else	\
 				header_date=$$(sed -n '8p' "$$file" |	\
 					sed 's/.*Updated: \([0-9/: ]*\).*/\1/'); \
@@ -322,7 +323,7 @@ headers:
 				cat $$file >> temp.txt; \
 				cat temp.txt > $$file; \
 				rm -f temp.txt; \
-				echo "$(GRAY)Header create:$(RESET) $file"; \
+				echo "$(GRAY)Header create:$(RESET) $$file"; \
 				modified=1; \
 			else	\
 				header_date=$$(sed -n '8p' "$$file" |	\

@@ -2,8 +2,6 @@
 *
 
 # Whitelist
-!.gitignore
-
 !Makefile
 
 !*.cpp
@@ -17,3 +15,5 @@
 
 !README.md
 !STYLE.md
+
+#!.gitignore
