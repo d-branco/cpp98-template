@@ -31,12 +31,14 @@ Let's be honest, setting up a C++98 environment that strictly adheres to the 42 
 4. **Code with clarity:** Use Harl to print messages that only appear when compiling a debuggin executable with `make debug`. They won't appear on the main executable and are useful to code slowly and clearly. Fours levels of logging by default.
 
 5. **Run in four modes:**
+
 | Command         | Description                                                       |
 | :-------------- | :---------------------------------------------------------------- |
 | `make run`      | Compiles the main executable if needed, and executes it           |
-| `make debug`    | Compiles the project with debug symbols (`-g3`, `-O0`) for `gdb`. |
+| `make debug`    | Compiles with debug  prints and symbols (`-g3`, `-O0`) for `gdb`. |
 | `make docstest` | Compiles 'doctest' unit tests and runs them.                      |
 | `make valgrind` | Runs through `valgrind` to detect memory leaks.                   |
+
 Or just run `make test` and do all in a command.
 
 ---
