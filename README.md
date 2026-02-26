@@ -11,7 +11,19 @@ Let's be honest, setting up a C++98 environment that strictly adheres to the 42 
 - **Built-in Testing & Valgrind:** Integrated `doctest` for simple, inline unit testing. Automated `valgrind` hooks catch memory leaks instantly—no more finding out you have a leak the night before the deadline.
 - **Automated Linting & Formatting:** The `Makefile` dynamically generates `.clang-format`, `.clang-tidy`, and `.clangd` configurations on the fly. This keeps your codebase perfectly styled without dirtying your git tree.
 - **Print statement driven development:** Harl will print all four logs, but only whem compile with the `DEBUG` flag. Comes with four logging levels. Keep your main executable pristine.
-- **Auto-magic Banners:** Need to update your headers? Just run `make headers` and it's done. Check the Makefile and make your own personalized header!
+- **Auto-magic Banners:** Auto updated headers with filename, creation and updated dates. Just run `make headers` and it's done. Check the Makefile and make your own personalized header!
+```txt
+#  **************************************************************************  #
+#                                           ::::::::    ::::::::   :::::::::   #
+#    Makefile                             :+:    :+:  :+:    :+:  :+:          #
+#                                              +:+         :+:   :+:           #
+#    github.com/d-branco                    +#+         +#+      +#+#+#+       #
+#                                        +#+         +#+              +#+      #
+#    Created: 2026/02/25 20:52:12      #+#         #+#      +#+        #+#     #
+#    Updated: 2026/02/25 20:54:49     #########  #########  ###      ###       #
+#                                                             ########         #
+#  **************************************************************************  #
+```
 
 ---
 
