@@ -5,7 +5,7 @@
 #    github.com/d-branco                    +#+         +#+      +#+#+#+       #
 #                                        +#+         +#+              +#+      #
 #    Created: 2026/02/25 20:52:12      #+#         #+#      +#+        #+#     #
-#    Updated: 2026/02/25 20:54:49     #########  #########  ###      ###       #
+#    Updated: 2026/02/26 12:48:17     #########  #########  ###      ###       #
 #                                                             ########         #
 #  **************************************************************************  #
 
@@ -311,12 +311,11 @@ headers:
 					update_date=$$(date '+%Y/%m/%d %H:%M:%S'); \
 					sed -i "8s|.*|#    Updated: $$update_date     #########  #########  ###      ###       #|" "$$file"; \
 				fi; \
-	\
 			fi; \
 		fi; \
 	done; \
 	\
-	for file in $$(find . -name "*.cpp" -o -name "*.hpp"); do	\
+	for file in $$(find . -name "*.cpp"); do	\
 		if [ -f "$$file" ]; then	\
 			first_line=$$(head -n 1 "$$file"); \
 			if [ "$$first_line" != "/* ************************************************************************** */" ]; then	\
@@ -344,6 +343,41 @@ headers:
 					echo "$(GRAY)Header update:$(RESET) $$file"; \
 					update_date=$$(date '+%Y/%m/%d %H:%M:%S'); \
 					sed -i "8s|.*|/*   Updated: $$update_date     #########  #########  ###      ###      */|" "$$file"; \
+				fi; \
+			fi; \
+		fi; \
+	done; \
+	\
+	\
+	for file in $$(find . -name "*.hpp"); do	\
+		if [ -f "$$file" ]; then	\
+			first_line=$$(head -n 1 "$$file"); \
+			if [ "$$first_line" != "/* ************************************************************************** */" ]; then	\
+				echo "/* ************************************************************************** */" > temp.txt ; \
+				echo "/*                                          ::::::::    ::::::::   :::::::::  */" >> temp.txt ; \
+				printf "/*   %-36.36s :+:    :+:  :+:    :+:  :+:         */\n" "$$(basename $$file)" >> temp.txt; \
+				echo "/*                                             +:+         :+:   :+:          */" >> temp.txt ; \
+				echo "/*   github.com/d-branco                    +#+         +#+      +#+#+#+      */" >> temp.txt ; \
+				echo "/*                                       +#+         +#+              +#+     */" >> temp.txt ; \
+				echo "/*   Created: $$(date '+%Y/%m/%d %H:%M:%S')      #+#         #+#      +#+        #+#    */" >> temp.txt ; \
+				echo "/*   Updated: $$(date '+%Y/%m/%d %H:%M:%S')     #########  #########  ###      ###      */" >> temp.txt ; \
+				echo "/*                                                            ########        */" >> temp.txt ; \
+				echo "/* ************************************************************************** */" >> temp.txt ; \
+				echo "" >> temp.txt ; \
+				cat $$file >> temp.txt; \
+				cat temp.txt > $$file; \
+				rm -f temp.txt; \
+				echo "$(GRAY)Header create:$(RESET) $$file"; \
+			else	\
+				header_date=$$(sed -n '8p' "$$file" |	\
+					sed 's/.*Updated: \([0-9/: ]*\).*/\1/'); \
+				header_epoch=$$(date -d "$$header_date" +%s 2>/dev/null || echo 0); \
+				file_epoch=$$(stat -c %Y "$$file"); \
+				if [ $$file_epoch -gt $$header_epoch ]; then	\
+					echo "$(GRAY)Header update:$(RESET) $$file"; \
+					update_date=$$(date '+%Y/%m/%d %H:%M:%S'); \
+					sed -i "8s|.*|/*   Updated: $$update_date     #########  #########  ###      ###      */|" "$$file"; \
+					make --silent clean; \
 				fi; \
 			fi; \
 		fi; \
