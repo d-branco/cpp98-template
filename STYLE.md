@@ -89,3 +89,9 @@ These must be explicitly defined, even if the compiler-generated versions are su
 - **Check style:** `make style`
 - **Apply fixes:** `make fix-style`
 - **Generate Headers:** `make headers`
+
+## 11. Include Directives & Dependencies
+
+- **Libraries Definition:** Standard libraries and external dependencies must be included within the corresponding header file (`.hpp`), and **never** directly inside the `.cpp` file.
+- **Source Includes:** Each `.cpp` file must include **only** its own matching header file.
+- **Main Include:** The `main.cpp` file must solely include the central `header.hpp` header.
